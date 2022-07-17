@@ -9,30 +9,30 @@ anchor_bottom = 1.0
 theme = ExtResource( 1 )
 script = ExtResource( 2 )
 
-[node name="Buttons" type="Node" parent="."]
+[node name="Buttons" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
 
 [node name="PlayButton" type="Button" parent="Buttons"]
 anchor_left = 0.4375
 anchor_top = 0.413
 anchor_right = 0.562
 anchor_bottom = 0.533
-margin_top = 8.2
-margin_right = 0.511963
-margin_bottom = 0.199982
+margin_left = 430.5
+margin_top = 239.48
+margin_right = 525.52
+margin_bottom = 274.68
 text = "Play"
-__meta__ = {
-"_edit_use_anchors_": true
-}
 
 [node name="HelpButton" type="Button" parent="Buttons"]
 anchor_left = 0.437
 anchor_top = 0.64
 anchor_right = 0.562
 anchor_bottom = 0.747
-margin_left = 0.511993
-margin_top = -3.05176e-05
-margin_right = 0.511963
-margin_bottom = -0.200073
+margin_left = 430.52
+margin_top = 358.4
+margin_right = 525.52
+margin_bottom = 394.12
 text = "Help"
 
 [node name="QuitButton" type="Button" parent="Buttons"]
@@ -40,21 +40,26 @@ anchor_left = 0.4375
 anchor_top = 0.853
 anchor_right = 0.562
 anchor_bottom = 0.96
-margin_top = 0.199982
-margin_right = 0.511963
+margin_left = 430.5
+margin_top = 477.88
+margin_right = 525.52
+margin_bottom = 513.6
 text = "Quit"
 
 [node name="HelpDialog" type="AcceptDialog" parent="."]
 visible = true
-anchor_left = 0.0625
-anchor_top = 0.34
-anchor_right = 0.374687
-anchor_bottom = 0.746667
-margin_right = 0.319992
+anchor_left = 0.289062
+anchor_top = 0.306667
+anchor_right = 0.693
+anchor_bottom = 0.713
+margin_right = 0.367981
+margin_bottom = 0.200165
 window_title = "Help!"
-dialog_text = "Arrow keys to move.
+dialog_text = "Left and right arrow keys to move.
 
 Space to jump.
+
+Aim up and down with up and fown arrow keys.
 
 Survive"
 __meta__ = {

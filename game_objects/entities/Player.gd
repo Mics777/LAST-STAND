@@ -91,7 +91,8 @@ func _physics_process(delta):
 	if velocity.y < 0:
 		$PlayerSprite.animation = "jump"
 	
-	$DebugDisplayVelocity.text = str(velocity)
+	$DebugDisplayVelocity.text = \
+	str(Vector2(int(velocity.x), int(velocity.y)))
 	move_and_slide(velocity, Vector2(0, -1))
 
 # custom functions
@@ -102,6 +103,7 @@ func shoot():
 	$GunSprite.visible = true
 	var bullet = BULLET.instance()
 	bullet.rotation = $GunSprite.rotation
+	bullet.type = "normal"
 	emit_signal("shoot", bullet)
 	
 	# start firerate timer

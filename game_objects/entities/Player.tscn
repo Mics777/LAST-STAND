@@ -71,6 +71,7 @@ margin_bottom = -34.0
 [node name="PlayerSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 8 )
 animation = "idle"
+frame = 2
 playing = true
 
 [node name="GunSprite" type="Sprite" parent="."]
