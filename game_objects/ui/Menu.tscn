@@ -1,0 +1,66 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://ui_theme.tres" type="Theme" id=1]
+[ext_resource path="res://game_objects/ui/Menu.gd" type="Script" id=2]
+
+[node name="Menu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 1 )
+script = ExtResource( 2 )
+
+[node name="Buttons" type="Node" parent="."]
+
+[node name="PlayButton" type="Button" parent="Buttons"]
+anchor_left = 0.4375
+anchor_top = 0.413
+anchor_right = 0.562
+anchor_bottom = 0.533
+margin_top = 8.2
+margin_right = 0.511963
+margin_bottom = 0.199982
+text = "Play"
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="HelpButton" type="Button" parent="Buttons"]
+anchor_left = 0.437
+anchor_top = 0.64
+anchor_right = 0.562
+anchor_bottom = 0.747
+margin_left = 0.511993
+margin_top = -3.05176e-05
+margin_right = 0.511963
+margin_bottom = -0.200073
+text = "Help"
+
+[node name="QuitButton" type="Button" parent="Buttons"]
+anchor_left = 0.4375
+anchor_top = 0.853
+anchor_right = 0.562
+anchor_bottom = 0.96
+margin_top = 0.199982
+margin_right = 0.511963
+text = "Quit"
+
+[node name="HelpDialog" type="AcceptDialog" parent="."]
+visible = true
+anchor_left = 0.0625
+anchor_top = 0.34
+anchor_right = 0.374687
+anchor_bottom = 0.746667
+margin_right = 0.319992
+window_title = "Help!"
+dialog_text = "Arrow keys to move.
+
+Space to jump.
+
+Survive"
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[connection signal="pressed" from="Buttons/PlayButton" to="." method="_on_PlayButton_pressed"]
+[connection signal="pressed" from="Buttons/HelpButton" to="." method="_on_HelpButton_pressed"]
+[connection signal="pressed" from="Buttons/QuitButton" to="." method="_on_QuitButton_pressed"]
