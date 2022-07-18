@@ -3,19 +3,20 @@ extends KinematicBody2D
 
 # Declare member variables here. Examples:
 signal shoot
+signal show_score
 var velocity := Vector2(0, 0)
-var jump = 2
-var speed := 400
-var aim
+
 const FRICTION := 0.09
 const ACCELERATION := 0.02
 const BULLET := preload("res://game_objects/entities/bullet/Bullet.tscn")
+var aim
 enum Aim { UP, DOWN, LEFT, RIGHT }
-
+onready var jump  := 2
+onready var speed := 400
+onready var score := 0
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	aim = Aim.RIGHT
-
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
@@ -91,6 +92,10 @@ func _physics_process(delta):
 	if velocity.y < 0:
 		$PlayerSprite.animation = "jump"
 	
+	# emit signal to output score to Main
+	emit_signal("show_score", str(score))
+	
+	# debug-specific code: disabled on release
 	$DebugDisplayVelocity.text = \
 	str(Vector2(int(velocity.x), int(velocity.y)))
 	move_and_slide(velocity, Vector2(0, -1))
@@ -112,3 +117,7 @@ func shoot():
 
 func _on_FireRateTimer_timeout():
 	$GunSprite.visible = false
+
+
+func _on_SurviveTickTimer_timeout():
+	score += 5
