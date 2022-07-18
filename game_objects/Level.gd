@@ -27,5 +27,5 @@ func _on_Player_shoot(bullet):
 func _on_VerticalLimit_body_entered(body):
 	print(body.name)
 	if body.name == "Player":
-		# $Player.queue_free()
+		$Player.alive = false
 		emit_signal("game_over")

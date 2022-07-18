@@ -6,10 +6,13 @@ extends Node2D
 # var b = "text"
 const LEVEL := preload("res://game_objects/Level.tscn")
 
+onready var last_score    := 0
+onready var highest_score := 0
 var level
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$Menu.visible = true
+	update_score_history(0)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -41,13 +44,12 @@ func _get_player_score(score_str):
 
 func _game_over():
 	$HUD/GameOverTimer.start()
+	update_score_history(level.get_node("Player").score)
 
 func start_game():
 	$Menu.visible = false
 	$HUD.visible = true
 	level = LEVEL.instance()
-#	level.get_node("Player") \
-#	.connect("show_score", self, "_get_player_score")
 	level.connect("current_score", self, "_get_player_score")
 	level.connect("game_over", self, "_game_over")
 	add_child(level)
@@ -56,3 +58,16 @@ func end_game():
 	level.queue_free()
 	$HUD.visible = false
 	$Menu.visible = true
+
+func update_score_history(score: int):
+	
+	# update scores
+	last_score = score
+	if score > highest_score:
+		highest_score = score
+	
+	# display scores
+	$Menu/Progress/PrevScoreLabel.text \
+	= "previous run: " + str(last_score)
+	$Menu/Progress/HighScoreLabel.text \
+	= "high score: " + str(highest_score)

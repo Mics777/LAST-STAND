@@ -14,6 +14,7 @@ enum Aim { UP, DOWN, LEFT, RIGHT }
 onready var jump  := 2
 onready var speed := 400
 onready var score := 0
+onready var alive := true
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	aim = Aim.RIGHT
@@ -120,4 +121,4 @@ func _on_FireRateTimer_timeout():
 
 
 func _on_SurviveTickTimer_timeout():
-	score += 5
+	if alive: score += 5
