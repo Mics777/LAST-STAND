@@ -21,15 +21,15 @@ func _ready():
 
 func _physics_process(delta):
 	
+	
+	
 	if is_on_floor():
 		velocity.y = 0
 	else:
 		velocity.y += 12
 	
 	move_and_slide(velocity, Vector2(0, -1))
-	
 	for col_i in get_slide_count():
 		var collision = get_slide_collision(col_i)
 		if collision.collider.name == "Bullet":
-			print("dead")
 			queue_free()

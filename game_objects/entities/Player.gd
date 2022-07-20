@@ -119,7 +119,7 @@ func _physics_process(delta):
 # custom functions
 func die():
 	hide()
-	$Collision.disabled = true
+	$Shape.disabled = true
 	alive = false
 
 func shoot():
@@ -141,3 +141,8 @@ func _on_FireRateTimer_timeout():
 
 func _on_SurviveTickTimer_timeout():
 	if alive: score += 5
+
+
+func _on_Hitbox_body_entered(body):
+	if body.is_in_group("enemies"):
+		die()

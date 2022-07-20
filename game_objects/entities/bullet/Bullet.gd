@@ -1,9 +1,10 @@
-extends KinematicBody2D
+extends Area2D
 
 
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
+signal kill_score
 var direction := Vector2(0, -1)
 var speed := 800.0 # default speed
 var type : String
@@ -20,8 +21,12 @@ func _ready():
 #	pass
 
 func _physics_process(delta):
-	move_and_slide(direction * speed)
-	var collision_data = get_last_slide_collision()
-	if collision_data:
-		print(collision_data.collider)
-		queue_free()
+	position += direction * speed * delta
+	# move_and_slide(direction * speed)
+
+func _on_Bullet_body_entered(body):
+	if body.is_in_group("enemies"):
+		print("Enemy killed: ", body.name)
+		emit_signal("kill_score", 50)
+		body.queue_free()
+	queue_free()

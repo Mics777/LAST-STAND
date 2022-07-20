@@ -43,10 +43,12 @@ func _get_player_score(score_str):
 	$HUD/ScoreLabel.text = score_str
 
 func _game_over():
+	get_tree().paused = true
 	$HUD/GameOverTimer.start()
 	update_score_history(level.get_node("Player").score)
 
 func start_game():
+	get_tree().paused = false
 	$Menu.visible = false
 	$HUD.visible = true
 	level = LEVEL.instance()

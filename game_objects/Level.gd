@@ -28,6 +28,7 @@ func _physics_process(delta):
 func _on_Player_shoot(bullet):
 	bullet.position = $Player.position \
 	 + $Player/GunSprite.offset.rotated($Player/GunSprite.rotation)
+	bullet.connect("kill_score", self, "_on_enemy_killed")
 	add_child(bullet)
 
 
@@ -53,7 +54,7 @@ func _on_Timer_timeout():
 				enemy.position = $Spawn/Zombie/RightPoint.position
 				enemy.velocity = Vector2(-1, 0)
 			$Spawn/Timer.wait_time = rng.randf_range(0.2, 0.8)
-	
+
 	if enemy != null:
 		enemy.add_to_group("enemies")
 		add_child(enemy)
