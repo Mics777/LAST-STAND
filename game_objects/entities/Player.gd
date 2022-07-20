@@ -4,6 +4,7 @@ extends KinematicBody2D
 # Declare member variables here. Examples:
 signal shoot
 signal show_score
+signal dead
 var velocity := Vector2(0, 0)
 
 const FRICTION := 0.09
@@ -32,6 +33,8 @@ func _physics_process(delta):
 	# velocity.x = 0
 	
 	# check player state
+	
+	# player to world
 	if is_on_floor():
 		velocity.y = 0
 		jump = 2
@@ -44,6 +47,12 @@ func _physics_process(delta):
 	if is_on_ceiling():
 		position.y += 1
 		velocity.y = 0
+	
+	# if player touches enemy
+	for col_i in get_slide_count():
+		var collision = get_slide_collision(col_i)
+		if collision.collider.is_in_group("enemies"):
+			die()
 	
 	# check movement input
 	var x_dir = 0 # x direction
@@ -99,9 +108,19 @@ func _physics_process(delta):
 	# debug-specific code: disabled on release
 	$DebugDisplayVelocity.text = \
 	str(Vector2(int(velocity.x), int(velocity.y)))
+	
+	# signal game if dead
+	if not alive:
+		emit_signal("dead")
+	
+	# move player
 	move_and_slide(velocity, Vector2(0, -1))
 
 # custom functions
+func die():
+	hide()
+	$Collision.disabled = true
+	alive = false
 
 func shoot():
 	

@@ -22,7 +22,6 @@ func _ready():
 func _physics_process(delta):
 	move_and_slide(direction * speed)
 	var collision_data = get_last_slide_collision()
-	if collision_data: 
-		if collision_data.collider.name == "Map":
-			queue_free()
+	if collision_data:
 		print(collision_data.collider)
+		queue_free()

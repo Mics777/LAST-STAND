@@ -51,7 +51,7 @@ extents = Vector2( 16, 32 )
 
 [node name="Bullet" type="KinematicBody2D"]
 collision_layer = 8
-collision_mask = 12
+collision_mask = 13
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_group_": true
