@@ -31,6 +31,9 @@ func _on_Player_shoot(bullet):
 	bullet.connect("kill_score", self, "_on_enemy_killed")
 	add_child(bullet)
 
+func _on_enemy_killed(score):
+	$Player.score += score
+
 
 func _on_VerticalLimit_body_entered(body):
 	print(body.name)
