@@ -9,6 +9,10 @@ var direction := Vector2(0, -1)
 var speed := 800.0 # default speed
 var type : String
 
+onready var kill_scores = {
+	Zombie = 20, Slime = 10
+}
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	scale = Vector2(0.5, 0.5)
@@ -26,7 +30,11 @@ func _physics_process(delta):
 
 func _on_Bullet_body_entered(body):
 	if body.is_in_group("enemies"):
+		var kill_score : int
 		print("Enemy killed: ", body.name)
-		emit_signal("kill_score", 50)
+		for enemy in kill_scores.keys():
+			if enemy in body.name:
+				kill_score = kill_scores[enemy]
+		emit_signal("kill_score", kill_score)
 		body.queue_free()
 	queue_free()

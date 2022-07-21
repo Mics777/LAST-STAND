@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://game_objects/entities/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/Platform.png" type="Texture" id=3]
@@ -34,7 +34,10 @@ points = PoolVector2Array( 32, 32, 0, 32, 0, 0, 32, 0 )
 extents = Vector2( 16.5, 312.5 )
 
 [sub_resource type="RectangleShape2D" id=5]
-extents = Vector2( 826, 36.5 )
+extents = Vector2( 2069, 36.5 )
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 111, 902.25 )
 
 [node name="Map" type="TileMap"]
 tile_set = SubResource( 1 )
@@ -59,37 +62,42 @@ shape = SubResource( 4 )
 position = Vector2( 1044, 308 )
 shape = SubResource( 4 )
 
-[node name="VerticalLimit" type="Area2D" parent="."]
+[node name="Void" type="Area2D" parent="."]
 collision_layer = 16
 collision_mask = 46
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="VerticalLimit"]
-position = Vector2( 513, 1112 )
+[node name="HorizontalBound1" type="CollisionShape2D" parent="Void"]
+position = Vector2( 684, 1112 )
 shape = SubResource( 5 )
+
+[node name="HorizontalBound2" type="CollisionShape2D" parent="Void"]
+position = Vector2( -440, 363 )
+shape = SubResource( 6 )
+
+[node name="VerticalBound" type="CollisionShape2D" parent="Void"]
+position = Vector2( 1497, 363 )
+shape = SubResource( 6 )
 
 [node name="Spawn" type="Node2D" parent="."]
 
 [node name="Timer" type="Timer" parent="Spawn"]
 autostart = true
 
-[node name="Zombie" type="Node2D" parent="Spawn"]
-visible = false
+[node name="Points" type="Node2D" parent="Spawn"]
 
-[node name="RightPoint" type="Position2D" parent="Spawn/Zombie"]
+[node name="LowerRight" type="Position2D" parent="Spawn/Points"]
 position = Vector2( 1095, 430 )
 
-[node name="LeftPoint" type="Position2D" parent="Spawn/Zombie"]
+[node name="LowerLeft" type="Position2D" parent="Spawn/Points"]
 position = Vector2( -61, 442 )
 
-[node name="Slime" type="Node2D" parent="Spawn"]
-
-[node name="RightPoint" type="Position2D" parent="Spawn/Slime"]
-position = Vector2( 997, -133 )
-
-[node name="LeftPoint" type="Position2D" parent="Spawn/Slime"]
+[node name="UpperLeft" type="Position2D" parent="Spawn/Points"]
 position = Vector2( 61, -133 )
+
+[node name="UpperRight" type="Position2D" parent="Spawn/Points"]
+position = Vector2( 997, -133 )
 
 [connection signal="dead" from="Player" to="." method="_on_Player_dead"]
 [connection signal="shoot" from="Player" to="." method="_on_Player_shoot"]
-[connection signal="body_entered" from="VerticalLimit" to="." method="_on_VerticalLimit_body_entered"]
+[connection signal="body_entered" from="Void" to="." method="_on_Void_body_entered"]
 [connection signal="timeout" from="Spawn/Timer" to="." method="_on_Timer_timeout"]
