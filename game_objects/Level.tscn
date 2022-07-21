@@ -73,12 +73,21 @@ shape = SubResource( 5 )
 autostart = true
 
 [node name="Zombie" type="Node2D" parent="Spawn"]
+visible = false
 
 [node name="RightPoint" type="Position2D" parent="Spawn/Zombie"]
 position = Vector2( 1095, 430 )
 
 [node name="LeftPoint" type="Position2D" parent="Spawn/Zombie"]
 position = Vector2( -61, 442 )
+
+[node name="Slime" type="Node2D" parent="Spawn"]
+
+[node name="RightPoint" type="Position2D" parent="Spawn/Slime"]
+position = Vector2( 997, -133 )
+
+[node name="LeftPoint" type="Position2D" parent="Spawn/Slime"]
+position = Vector2( 61, -133 )
 
 [connection signal="dead" from="Player" to="." method="_on_Player_dead"]
 [connection signal="shoot" from="Player" to="." method="_on_Player_shoot"]

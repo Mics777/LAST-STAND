@@ -4,7 +4,8 @@ extends TileMap
 # var a = 2
 # var b = "text"
 const ENEMIES = {
-	zombie =  preload("res://game_objects/entities/enemies/Zombie.tscn")
+	zombie =  preload("res://game_objects/entities/enemies/Zombie.tscn"),
+	slime = preload("res://game_objects/entities/enemies/Slime.tscn")
 }
 
 onready var rng := RandomNumberGenerator.new()
@@ -14,6 +15,7 @@ signal current_score
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	rng.randomize()
 	$Spawn/Timer.wait_time = rng.randf_range(.5, 1)
 	$Spawn/Timer.start()
 
@@ -46,7 +48,7 @@ func _on_VerticalLimit_body_entered(body):
 
 func _on_Timer_timeout():
 	var enemy
-	match rng.randi_range(0, 1):
+	match rng.randi_range(0, 2):
 		0: pass
 		1:
 			enemy = ENEMIES.zombie.instance()
@@ -56,7 +58,17 @@ func _on_Timer_timeout():
 			else:
 				enemy.position = $Spawn/Zombie/RightPoint.position
 				enemy.velocity = Vector2(-1, 0)
-			$Spawn/Timer.wait_time = rng.randf_range(0.2, 0.8)
+			$Spawn/Timer.wait_time = rng.randf_range(0.4, 0.8)
+		2:
+			enemy = ENEMIES.slime.instance()
+			if rng.randi_range(0, 1) == 1:
+				enemy.position = $Spawn/Slime/LeftPoint.position
+				enemy.direction = 1
+			else:
+				enemy.position = $Spawn/Slime/RightPoint.position
+				enemy.direction = -1
+			$Spawn/Timer.wait_time = rng.randf_range(0.5, 1.3)
+			
 
 	if enemy != null:
 		enemy.add_to_group("enemies")
