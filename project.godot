@@ -28,11 +28,16 @@ _global_script_class_icons={
 
 config/name="LAST STAND"
 run/main_scene="res://game_objects/Main.tscn"
+boot_splash/image="res://assets/Gun.png"
+boot_splash/fullsize=false
+boot_splash/bg_color=Color( 0, 0, 0, 1 )
 config/icon="res://icon.png"
 
 [display]
 
 window/size/resizable=false
+window/dpi/allow_hidpi=true
+window/vsync/use_vsync=false
 
 [gdnative]
 

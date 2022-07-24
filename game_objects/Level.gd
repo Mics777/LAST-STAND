@@ -53,24 +53,7 @@ func _on_Timer_timeout():
 			enemy.position = \
 			set_enemy_spawn_point(SPAWN_LOCATION_CLASS.POINT)
 			enemy.direction = set_enemy_spawn_dir(enemy)
-#		1:
-#			enemy = ENEMIES.zombie.instance()
-#			if rng.randi_range(0, 1) == 1:
-#				enemy.position = $Spawn/Zombie/LeftPoint.position
-#				enemy.velocity = Vector2(1, 0)
-#			else:
-#				enemy.position = $Spawn/Zombie/RightPoint.position
-#				enemy.velocity = Vector2(-1, 0)
-#			$Spawn/Timer.wait_time = rng.randf_range(0.4, 0.8)
-#		2:
-#			enemy = ENEMIES.slime.instance()
-#			if rng.randi_range(0, 1) == 1:
-#				enemy.position = $Spawn/Slime/LeftPoint.position
-#				enemy.direction = 1
-#			else:
-#				enemy.position = $Spawn/Slime/RightPoint.position
-#				enemy.direction = -1
-#			$Spawn/Timer.wait_time = rng.randf_range(0.5, 1.3)\
+			
 	if enemy != null:
 		enemy.add_to_group("enemies")
 		add_child(enemy)

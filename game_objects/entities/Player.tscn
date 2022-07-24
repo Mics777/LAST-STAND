@@ -72,6 +72,7 @@ position = Vector2( 0, 4 )
 shape = SubResource( 1 )
 
 [node name="DebugDisplayVelocity" type="Label" parent="."]
+visible = false
 margin_left = -20.0
 margin_top = -48.0
 margin_right = 20.0
@@ -81,7 +82,6 @@ theme = ExtResource( 4 )
 [node name="PlayerSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 8 )
 animation = "idle"
-frame = 1
 playing = true
 
 [node name="GunSprite" type="Sprite" parent="."]

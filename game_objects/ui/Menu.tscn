@@ -89,7 +89,7 @@ valign = 1
 margin_top = 584.0
 margin_right = 40.0
 margin_bottom = 603.0
-text = "unreleased ver 1.0.0"
+text = "v0.0.0"
 
 [node name="Progress" type="Control" parent="."]
 margin_right = 40.0
