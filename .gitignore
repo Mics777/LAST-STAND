@@ -8,3 +8,6 @@ lib/
 
 # access token
 token
+
+# commit history
+project_history
