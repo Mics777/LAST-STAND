@@ -5,6 +5,7 @@ extends Node2D
 # var a = 2
 # var b = "text"
 const LEVEL := preload("res://game_objects/Level.tscn")
+const VERSTION := "v1.0.0"
 
 onready var last_score    := 0
 onready var highest_score := 0
@@ -12,6 +13,7 @@ var level
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$Menu.visible = true
+	$Menu/VersionLabel.text = "version " + VERSTION 
 	update_score_history(0)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
