@@ -24,10 +24,11 @@ func _ready():
 #func _process(delta):
 #	pass
 
-func _physics_process(delta):
-	position += direction * speed * delta
-	# move_and_slide(direction * speed)
 
+func _physics_process(delta):
+	position += direction * speed * delta # moves bullet
+
+# decides what to do upon detecting certain physics bodies
 func _on_Bullet_body_entered(body):
 	if body.is_in_group("enemies"):
 		var kill_score : int

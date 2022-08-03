@@ -18,7 +18,8 @@ func _process(delta):
 		false:
 			$GameOverLabel.show()
 
-
+# callback functions, called upon hud interaction e.g. button clicked
+# sends signals to other nodes
 func _on_PauseButton_pressed():
 	$PauseDialog.popup()
 	emit_signal("hud_message", Msg.GAME_PAUSE)

@@ -19,14 +19,13 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
-#	$HUD.get_node("ScoreLabel").text = \
-#	str(level.get_node("Player").score)
+
 
 func _on_Menu_playButtonPressed():
 	start_game()
 
 
-
+# handle signals sent by hud.
 func _on_HUD_hud_message(msg):
 	match msg:
 		Hud.Msg.GAME_EXIT:
@@ -41,6 +40,7 @@ func _on_HUD_hud_message(msg):
 			start_game()
 			$HUD/PauseDialog.hide()
 
+# updates player score based on received score
 func _get_player_score(score_str):
 	$HUD/ScoreLabel.text = score_str
 
@@ -54,10 +54,12 @@ func start_game():
 	$Menu.visible = false
 	$HUD.visible = true
 	level = LEVEL.instance()
+	# allows node to listen to signals sent by the level node
 	level.connect("current_score", self, "_get_player_score")
 	level.connect("game_over", self, "_game_over")
 	add_child(level)
 
+# end game logic
 func end_game():
 	level.queue_free()
 	$HUD.visible = false

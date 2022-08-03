@@ -21,8 +21,7 @@ func _ready():
 
 func _physics_process(delta):
 	
-	
-	
+	# ensures that entity doesn't fall too quickly upon falling off
 	if is_on_floor():
 		velocity.y = 0
 	else:

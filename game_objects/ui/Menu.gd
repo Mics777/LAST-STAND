@@ -15,7 +15,8 @@ func _ready():
 #func _process(delta):
 #	pass
 
-
+# callback functions,
+# all three send signals upon any event from the ui
 func _on_QuitButton_pressed():
 	get_tree().quit()
 

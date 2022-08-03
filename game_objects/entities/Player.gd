@@ -24,26 +24,26 @@ func _ready():
 #func _process(delta):
 #	pass
 
+# used for one time event i.e. shoot
 func _input(event):
 	if event.is_action_pressed("player_shoot") \
 	and $FireRateTimer.is_stopped():
 		shoot()
 
 func _physics_process(delta):
-	# velocity.x = 0
-	
-	# check player state
-	
-	# player to world
+	# ensures player doesn't fall off too quickly 
+	# when off the platform
 	if is_on_floor():
 		velocity.y = 0
 		jump = 2
 	else:
 		velocity.y += 25
 	
+	# ensures player doesn't stick to walls
 	if is_on_wall():
 		velocity.x = 0
 	
+	# make so that player doesn't stick to the ceiling
 	if is_on_ceiling():
 		position.y += 1
 		velocity.y = 0
@@ -54,7 +54,7 @@ func _physics_process(delta):
 		if collision.collider.is_in_group("enemies"):
 			die()
 	
-	# check movement input
+	# check aim and movement input
 	var x_dir = 0 # x direction
 	if Input.is_action_pressed("player_move_left"):
 		x_dir -= 1
@@ -93,6 +93,7 @@ func _physics_process(delta):
 			$GunSprite.rotation = PI/2
 	
 	# update player state
+	# code allows for smooth acceleration/deceleration of player movement
 	if abs(x_dir) > 0:
 		velocity.x = lerp(velocity.x, x_dir, ACCELERATION)
 	else:
@@ -117,6 +118,8 @@ func _physics_process(delta):
 	move_and_slide(velocity, Vector2(0, -1))
 
 # custom functions
+
+# run upon player death
 func die():
 	hide()
 	$Shape.disabled = true
@@ -134,11 +137,11 @@ func shoot():
 	# start firerate timer
 	$FireRateTimer.start()
 
-
+# displays gun and allows the player to fire 
 func _on_FireRateTimer_timeout():
 	$GunSprite.visible = false
 
-
+# add points if still alive
 func _on_SurviveTickTimer_timeout():
 	if alive: score += 5
 

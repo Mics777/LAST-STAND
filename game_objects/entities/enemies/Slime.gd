@@ -9,7 +9,6 @@ var direction := 0
 onready var speed := 200
 onready var jump_vel := 200
 onready var rng := RandomNumberGenerator.new()
-# onready var jumping := true
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -22,6 +21,7 @@ func _ready():
 #func _process(delta):
 #	pass
 
+# handles movement physics
 func _physics_process(delta):
 	if is_on_floor():
 			velocity.x = 0
@@ -33,6 +33,7 @@ func _physics_process(delta):
 	
 	move_and_slide(velocity, Vector2(0, -1))
 
+# handles movement logic i.e. jumping
 func _on_JumpTimer_timeout():
 	if is_on_floor():
 		velocity.y = -(jump_vel + rng.randf_range(-100, 100))
